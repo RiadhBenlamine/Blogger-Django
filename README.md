@@ -1,2 +1,2 @@
 # Blogger-Django
-comming soon
+Blog system made with django
