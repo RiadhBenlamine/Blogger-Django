@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{author.user.username}}{% endblock title %}
+{% block content %}
+<h1>{{ author.user.username }}</h1>
+<i>{{ author.bio }}</i>
+<i>{{ author.birth }}</i>
+<h3>Posts shared:</h3>
+{% for post in posts %}
+    <p><b><a href="{{post.get_absolute_url}}" class="text-decoration-none">{{post.title}}</a></b>-{{ post.publish }}</p>
+{% endfor %}
+{% endblock content %}

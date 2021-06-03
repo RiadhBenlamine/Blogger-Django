@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Create User{% endblock title %}
+{% block content %}
+<h1>Create a new account!</h1>
+{% if form.errors %}
+  <div class="alert alert-warning" role="alert">
+    <p>{{form.errors}}</p>
+  </div>
+{% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{form.username.label}}">{{form.username.label}}</label>
+          <input type="text"
+            class="form-control" name="{{form.username.name}}" id="{{form.username.id}}" aria-describedby="helpId" required>
+        </div>
+    
+        <div class="form-group">
+          <label for="{{form.password1.label}}">{{form.password1.label}}</label>
+          <input type="password" class="form-control" name="{{form.password1.name}}" id="{{form.password1.label}}" required>
+        </div>
+        <div class="form-group">
+          <label for="{{form.password2.label}}">{{form.password2.label}}</label>
+          <input type="password" class="form-control" name="{{form.password2.name}}" id="{{form.password2.label}}" required>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Create">
+    </form>
+{% endblock content %}

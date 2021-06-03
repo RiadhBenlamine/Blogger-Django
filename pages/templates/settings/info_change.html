@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Edit information
+{% endblock title %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.bio.label }}">{{ form.bio.label }}</label>
+      <textarea class="form-control" name="{{ form.bio.name }}" id="{{ form.bio.id }}" max=110 rows="3"></textarea>
+      <small class="text-muted">Up to 110 letter</small>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.birth.label }}">{{ form.birth.label }}</label>
+      <input type="text" class="form-control" name="{{ form.birth.name }}" id="{{ form.birth.id }}"  placeholder="yyyy-mm-dd">
+    </div>
+    <div class="form-group">
+      <label for="{{ form.gender.label }}">{{ form.gender.label }}</label>
+      <select class="form-control" name="{{ form.gender.name }}" id="{{ form.gender.id }}">
+        <option value="">--------</option>
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+      </select>
+    </div>
+    <br/>
+    <input type="submit" class="btn btn-primary" value="Update">
+</form>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+{% for post in object_list %}
+<h3>{{ post.title }}</h3>{% empty %}<h1>No posts available for now</h1>{% endfor %}
+<form action="search" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="search">
+</form>
+{% endblock content %}

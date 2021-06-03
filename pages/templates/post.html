@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{post.title}}
+{% endblock title %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+<br/>
+{% for comment in comments %}
+    <h4>{{ comment.author.username }}</h4>
+    <i>{{ comment.body }} </i>
+{% endfor %}
+<br/>
+{% if request.user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="submit">
+    </form>
+{% else %}
+<p>Login first to comment here</p>
+{% endif %}
+{% endblock content %}

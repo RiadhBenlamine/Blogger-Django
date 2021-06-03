@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'blogger:index' %}">Blogger</a>
+    
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogger:contact' %}">Contact</a>
+                </li>
+                
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogger:author_page' request.user.username %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blogger:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blogger:dashboard' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Administration</a>
+                        </li>
+                    {% endif %}
+                        <a class="nav-link" href="{% url 'blogger:logout' %}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blogger:profile_settings' %}">Settings</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blogger:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blogger:create_user' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
