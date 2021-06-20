@@ -42,11 +42,34 @@ class HomeView(LoginRequiredMixin, TemplateView):
 class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = 'settings/settings.html'
 
-class InfoUpdateView(LoginRequiredMixin, UpdateView):
+class InfoUpdateView(LoginRequiredMixin, View):
     model = Author
-    fields = ['bio', 'birth', 'gender']
+    form_klass = ChangeUserInfoForm
     template_name = 'settings/info_change.html'
-    success_url = reverse_lazy('blogger:home')
+    def get(self, request):
+        author = Author.objects.get(id=request.user.author.get().id)
+        form = self.form_klass()
+        context = {
+            'form':form
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request):
+        author = Author.objects.get(id=request.user.author.get().id)
+        user = User.objects.get(id=request.user.id)
+        form = self.form_klass(request.POST)
+        if form.is_valid():
+            user.username = form.data['username']
+            author.gender = form.data['gender']
+            author.birth = form.data["birth"]
+            author.bio = form.data['bio']
+            user.save()
+            author.save()
+        context = {
+            'form':form
+        }
+        
+        return redirect(reverse_lazy('blogger:home'))
 
 class ContactView(TemplateView):
     template_name = 'contact.html'

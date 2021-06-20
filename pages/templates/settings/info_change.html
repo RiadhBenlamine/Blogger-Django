@@ -5,18 +5,22 @@
 <form method="post">
     {% csrf_token %}
     <div class="form-group">
+      <label for="{{form.username.label}}">{{form.username.label}}</label>
+      <input type="text" name="{{ form.username.name }}" class="form-control" value="{{ request.user.username }}">
+    </div>
+    <div class="form-group">
       <label for="{{ form.bio.label }}">{{ form.bio.label }}</label>
-      <textarea class="form-control" name="{{ form.bio.name }}" id="{{ form.bio.id }}" max=110 rows="3"></textarea>
+      <textarea class="form-control" name="{{ form.bio.name }}" id="{{ form.bio.id }}" max=110 rows="3" placeholder="{{ request.user.author.get.bio }}"></textarea>
       <small class="text-muted">Up to 110 letter</small>
     </div>
     <div class="form-group">
       <label for="{{ form.birth.label }}">{{ form.birth.label }}</label>
-      <input type="text" class="form-control" name="{{ form.birth.name }}" id="{{ form.birth.id }}"  placeholder="yyyy-mm-dd">
+      <input type="text" class="form-control" name="{{ form.birth.name }}" id="{{ form.birth.id }}"  placeholder="yyyy-mm-dd" value="{{ request.user.author.get.birth|date:"Y-m-d"}}">
     </div>
     <div class="form-group">
       <label for="{{ form.gender.label }}">{{ form.gender.label }}</label>
-      <select class="form-control" name="{{ form.gender.name }}" id="{{ form.gender.id }}">
-        <option value="">--------</option>
+      <select class="form-control" name="{{ form.gender.name }}" id="{{ form.gender.id }}" value="{{ request.user.author.get.gender.lowercase }}>
+        <option value="">{{ request.user.author.get.gender }}</option>
         <option value="MALE">Male</option>
         <option value="FEMALE">Female</option>
       </select>

@@ -18,7 +18,7 @@ urlpatterns = [
     path('accounts/settings/', SettingsView.as_view(), name='profile_settings'),
     path('accounts/settings/password', views.PasswordChangeView.as_view(template_name='settings/password_change.html', success_url=reverse_lazy('blogger:password_change_done')), name='password_change'),
     path('accounts/settings/password/done', views.PasswordChangeDoneView.as_view(template_name='settings/password_done.html'), name='password_change_done'),
-    path('accounts/settings/information/<pk>', InfoUpdateView.as_view(), name='profile_update'),
+    path('accounts/settings/info', InfoUpdateView.as_view(), name='profile_update'),
     path('@<author>/<slug:slug>', PostView.as_view(), name='view_post',),
     path('home/post/create', CreatePostView.as_view(), name='create_post'),
     path('search', SearchView.as_view(), name='search_detail'),

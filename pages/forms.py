@@ -39,3 +39,14 @@ class SearchForm(forms.Form):
     def search_post(self, query):
         posts = Post.objects.filter(title__contains=query)
         return posts
+
+class ChangeUserInfoForm(forms.Form):
+    sex = (
+        ('male', 'Male'),
+        ('female', 'Female'),
+    )
+    username = forms.CharField(max_length=65,required=False)
+    bio = forms.CharField(widget=forms.Textarea, max_length=110, required=False)
+    birth = forms.DateField(required=False)
+    gender = forms.ChoiceField(choices=sex, required=False)
+    
